@@ -14,6 +14,7 @@ import org.orbitfiftyeight.android.notes.routing.Screen
 import org.orbitfiftyeight.android.notes.theme.NotesTheme
 import org.orbitfiftyeight.android.notes.ui.components.AppDrawer
 import org.orbitfiftyeight.android.notes.ui.components.Note
+import org.orbitfiftyeight.android.notes.ui.screen.NotesScreen
 import org.orbitfiftyeight.android.notes.viewmodel.MainViewModel
 import org.orbitfiftyeight.android.notes.viewmodel.MainViewModelFactory
 
@@ -38,24 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             NotesTheme {
-                val coroutineScope = rememberCoroutineScope()
-                val scaffoldState: ScaffoldState = rememberScaffoldState()
-                Scaffold(
-                    scaffoldState = scaffoldState,
-                    drawerContent = {
-                        AppDrawer(
-                            currentScreen = Screen.Notes,
-                            onScreenSelected = {
-                                /* TODO */
-                                coroutineScope.launch {
-                                    scaffoldState.drawerState.close()
-                                }
-                            })
-                    },
-                    content = {
-                        Note()
-                    }
-                )
+                NotesScreen(viewModel = viewModel)
             }
         }
     }

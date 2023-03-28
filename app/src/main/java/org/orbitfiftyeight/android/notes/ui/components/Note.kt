@@ -1,31 +1,32 @@
 package org.orbitfiftyeight.android.notes.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.orbitfiftyeight.android.notes.domain.model.NoteModel
 import org.orbitfiftyeight.android.notes.theme.green
+import org.orbitfiftyeight.android.notes.util.fromHex
 
 @Composable
-fun Note() {
+fun Note(
+    note: NoteModel,
+    onNoteClick: (NoteModel) -> Unit = {},
+    onNoteCheckedChange: (NoteModel) -> Unit = {}
+) {
     val bgShape: Shape = RoundedCornerShape(4.dp)
     Row(
         modifier = Modifier
@@ -34,12 +35,13 @@ fun Note() {
             .fillMaxWidth()
             .heightIn(min = 64.dp)
             .background(Color.White, bgShape)
+            .clickable(onClick = { onNoteClick(note) })
     ) {
         NoteColor(
             modifier = Modifier
                 .align(Alignment.CenterVertically)
                 .padding(start = 16.dp, end = 16.dp),
-            color = green,
+            color = Color.fromHex(note.color.hex),
             size = 40.dp,
             border = 2.dp
         )
@@ -49,7 +51,7 @@ fun Note() {
                 .align(Alignment.CenterVertically)
         ) {
             Text(
-                text = "Title",
+                text = note.title,
                 color = Color.Black,
                 maxLines = 1,
                 style = TextStyle(
@@ -59,7 +61,7 @@ fun Note() {
                 )
             )
             Text(
-                text = "Content",
+                text = note.content,
                 color = Color.Black.copy(alpha = 0.75f),
                 maxLines = 1,
                 style = TextStyle(
@@ -69,48 +71,23 @@ fun Note() {
                 )
             )
         }
-        Checkbox(
-            checked = false,
-            onCheckedChange = {},
-            modifier = Modifier
-                .padding(start = 16.dp)
-                .align(Alignment.CenterVertically)
-        )
-    }
-}
-
-@Composable
-fun NoteColor(
-    modifier: Modifier = Modifier,
-    color: Color,
-    size: Dp,
-    border: Dp
-) {
-    Box(
-        modifier = modifier
-            .size(size)
-            .clip(CircleShape)
-            .background(color)
-            .border(
-                BorderStroke(
-                    border, SolidColor(Color.Black)
-                ), CircleShape
+        if (note.isCheckedOff != null) {
+            Checkbox(
+                checked = note.isCheckedOff,
+                onCheckedChange = { isChecked ->
+                    val newNote = note.copy(isCheckedOff = isChecked)
+                    onNoteCheckedChange(newNote)
+                },
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .align(Alignment.CenterVertically)
             )
-    )
+        }
+    }
 }
 
 @Preview
 @Composable
 private fun NotePreview() {
-    Note()
-}
-
-@Preview
-@Composable
-private fun NoteColorPreview() {
-    NoteColor(
-        color = Color.Red,
-        size = 40.dp,
-        border = 2.dp
-    )
+    Note(note = NoteModel(1, "Note 1", "Content Note 1", null))
 }

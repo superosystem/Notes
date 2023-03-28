@@ -20,6 +20,30 @@ import org.orbitfiftyeight.android.notes.ui.components.NoteColor
 import org.orbitfiftyeight.android.notes.util.fromHex
 
 @Composable
+private fun ColorPicker(
+    colors: List<ColorModel>,
+    onColorSelect: (ColorModel) -> Unit
+) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            text = "Color Picker",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(8.dp)
+        )
+        LazyColumn(modifier = Modifier.fillMaxWidth()) {
+            items(colors.size) { itemIndex ->
+                val color = colors[itemIndex]
+                ColorItem(
+                    color = color,
+                    onColorSelect = onColorSelect
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun ColorItem(
     color: ColorModel,
     onColorSelect: (ColorModel) -> Unit
@@ -46,30 +70,6 @@ fun ColorItem(
                 .padding(horizontal = 16.dp)
                 .align(Alignment.CenterVertically)
         )
-    }
-}
-
-@Composable
-private fun ColorPicker(
-    colors: List<ColorModel>,
-    onColorSelect: (ColorModel) -> Unit
-) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Text(
-            text = "Color Picker",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(8.dp)
-        )
-        LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            items(colors.size) { itemIndex ->
-                val color = colors[itemIndex]
-                ColorItem(
-                    color = color,
-                    onColorSelect = onColorSelect
-                )
-            }
-        }
     }
 }
 
