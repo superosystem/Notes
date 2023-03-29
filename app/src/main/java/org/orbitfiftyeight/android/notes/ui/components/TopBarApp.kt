@@ -27,49 +27,49 @@ import org.orbitfiftyeight.android.notes.ui.screen.NotesScreen
 
 @Composable
 fun TopBarApp(
-    title: String,
-    icon: ImageVector,
-    onIconClick: () -> Unit
+  title: String,
+  icon: ImageVector,
+  onIconClick: () -> Unit
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .background(color = MaterialTheme.colors.primarySurface)
-    ) {
-        Image(
-            imageVector = icon,
-            contentDescription = "Top Bar App Icon",
-            colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary),
-            modifier = Modifier
-                .clickable(onClick = onIconClick)
-                .padding(16.dp)
-                .align(Alignment.CenterVertically)
-        )
-        Text(
-            text = title,
-            color = MaterialTheme.colors.onPrimary,
-            style = TextStyle(
-                fontWeight = FontWeight.Medium,
-                fontSize = 20.sp,
-                letterSpacing = 0.15.sp
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.CenterVertically)
-                .padding(start = 16.dp, end = 16.dp)
-        )
-    }
+  Row(
+    modifier = Modifier
+      .fillMaxWidth()
+      .height(56.dp)
+      .background(color = MaterialTheme.colors.primarySurface)
+  ) {
+    Image(
+      imageVector = icon,
+      contentDescription = "Top Bar App Icon",
+      colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary),
+      modifier = Modifier
+        .clickable(onClick = onIconClick)
+        .padding(16.dp)
+        .align(Alignment.CenterVertically)
+    )
+    Text(
+      text = title,
+      color = MaterialTheme.colors.onPrimary,
+      style = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp,
+        letterSpacing = 0.15.sp
+      ),
+      modifier = Modifier
+        .fillMaxWidth()
+        .align(Alignment.CenterVertically)
+        .padding(start = 16.dp, end = 16.dp)
+    )
+  }
 }
 
 @Preview
 @Composable
 private fun TopBarAppPreview() {
-    NotesTheme {
-        TopBarApp(
-            title = "Notes",
-            icon = Icons.Filled.List,
-            onIconClick = {}
-        )
-    }
+  NotesTheme {
+    TopBarApp(
+      title = "Notes",
+      icon = Icons.Filled.List,
+      onIconClick = {}
+    )
+  }
 }

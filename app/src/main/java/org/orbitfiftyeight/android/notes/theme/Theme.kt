@@ -2,23 +2,27 @@ package org.orbitfiftyeight.android.notes.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 
 private val LightThemeColors = lightColors(
-  primary = green,
-  primaryVariant = greenDark,
-  secondary = green
+  primary = blue,
+  primaryVariant = blueDark,
+  secondary = blue
 )
 
-private val DarkThemeColors = lightColors(
-  primary = green,
-  primaryVariant = greenDark,
-  secondary = green
+private val DarkThemeColors = darkColors(
+  primary = Color(0xFF1A9EBC),
+  primaryVariant = Color(0xFF97e0f1),
+  secondary = red,
+  onPrimary = Color.White,
 )
+
 
 /**
  * Responsible for switching color palette for dark and light theme.
