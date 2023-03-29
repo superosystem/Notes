@@ -47,13 +47,6 @@ class RepositoryImpl(
                 colorDao.insertAll(*colors)
             }
 
-            // Prepopulate notes
-            val notes = NoteDbModel.DEFAULT_NOTES.toTypedArray()
-            val dbNotes = noteDao.getAllSync()
-            if (dbNotes.isEmpty()) {
-                noteDao.insertAll(*notes)
-            }
-
             postInitAction.invoke()
         }
     }

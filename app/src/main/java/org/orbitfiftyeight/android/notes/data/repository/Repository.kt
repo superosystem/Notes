@@ -8,7 +8,6 @@ import org.orbitfiftyeight.android.notes.domain.model.NoteModel
  * Allows communication with the app's database.
  */
 interface Repository {
-
   // notes
   fun getAllNotesNotInTrash(): Flow<List<NoteModel>>
   fun getAllNotesInTrash(): Flow<List<NoteModel>>

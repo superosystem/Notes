@@ -37,14 +37,6 @@ private fun AppDrawerHeader() {
   }
 }
 
-@Preview
-@Composable
-fun AppDrawerHeaderPreview() {
-  NotesTheme {
-    AppDrawerHeader()
-  }
-}
-
 @Composable
 private fun ScreenNavigationButton(
   icon: ImageVector,
@@ -110,19 +102,6 @@ private fun ScreenNavigationButton(
   }
 }
 
-@Preview
-@Composable
-fun ScreenNavigationButtonPreview() {
-  NotesTheme {
-    ScreenNavigationButton(
-      icon = Icons.Filled.Home,
-      label = "Notes",
-      isSelected = true,
-      onClick = { }
-    )
-  }
-}
-
 @Composable
 private fun LightDarkThemeItem() {
   Row(
@@ -145,14 +124,6 @@ private fun LightDarkThemeItem() {
         .padding(start = 8.dp, end = 8.dp)
         .align(alignment = Alignment.CenterVertically)
     )
-  }
-}
-
-@Preview
-@Composable
-fun LightDarkThemeItemPreview() {
-  NotesTheme {
-    LightDarkThemeItem()
   }
 }
 
@@ -182,6 +153,35 @@ fun AppDrawer(
         onScreenSelected.invoke(Screen.Trash)
       }
     )
+    LightDarkThemeItem()
+  }
+}
+
+@Preview
+@Composable
+fun AppDrawerHeaderPreview() {
+  NotesTheme {
+    AppDrawerHeader()
+  }
+}
+
+@Preview
+@Composable
+fun ScreenNavigationButtonPreview() {
+  NotesTheme {
+    ScreenNavigationButton(
+      icon = Icons.Filled.Home,
+      label = "Notes",
+      isSelected = true,
+      onClick = { }
+    )
+  }
+}
+
+@Preview
+@Composable
+fun LightDarkThemeItemPreview() {
+  NotesTheme {
     LightDarkThemeItem()
   }
 }
